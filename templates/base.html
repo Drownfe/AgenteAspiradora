@@ -1,0 +1,27 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulación Robot Aspiradora</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body>
+    <header class="app-header">
+        <h1>Agente Reactivo: Robot Aspiradora</h1>
+        <p class="subtitle">
+            Simulación de un agente inteligente que limpia una habitación,
+            tomando decisiones basadas en percepciones locales.
+        </p>
+    </header>
+
+    <main class="app-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="app-footer">
+        <small>Proyecto académico</small>
+    </footer>
+</body>
+</html>

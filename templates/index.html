@@ -1,0 +1,118 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="layout">
+
+    <!-- Habitación -->
+    <section class="panel grid-panel">
+        <h2>Habitación</h2>
+
+        <div id="grid" class="grid">
+            <!-- La grilla se rellena desde main.js -->
+        </div>
+
+        <p class="legend">
+            <span>🧹 Robot</span>
+            <span>🧱 Pared</span>
+            <span>🟫 Suciedad</span>
+            <span>🔌 Base</span>
+            <span>⬜ Celda limpia</span>
+        </p>
+    </section>
+
+    <!-- Estado del agente -->
+    <section class="panel info-panel">
+        <h2>Estado del agente</h2>
+
+        <!-- Pastilla de estado general -->
+        <div class="status-row">
+            <div class="status-pill" id="agent-status">
+                En espera
+            </div>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Paso actual:</span>
+            <span class="value" id="step-count">0</span>
+        </div>
+
+        <!-- Batería visual -->
+        <div class="info-row battery-row">
+            <span class="label">Batería:</span>
+            <div class="battery-container">
+                <div class="battery">
+                    <div class="battery-level" id="battery-level"></div>
+                </div>
+                <span id="battery-text" class="battery-text">0%</span>
+            </div>
+        </div>
+
+        <!-- Progreso de limpieza -->
+        <div class="info-row">
+            <span class="label">% Limpieza (aprox.):</span>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-bar"></div>
+                </div>
+                <span class="value" id="progress">0%</span>
+            </div>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Celdas sucias restantes:</span>
+            <span class="value" id="dirty-remaining">-</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Orientación:</span>
+            <span class="value" id="orientation">N</span>
+        </div>
+
+        <h3>Último ciclo</h3>
+
+        <div class="info-row">
+            <span class="label">Percepción batería:</span>
+            <span class="value" id="perc-battery">-</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Obstáculo frente:</span>
+            <span class="value" id="perc-front">-</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Celda sucia:</span>
+            <span class="value" id="perc-dirt">-</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">En base:</span>
+            <span class="value" id="perc-base">-</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Acción tomada:</span>
+            <span class="value" id="last-action">-</span>
+        </div>
+
+        <div class="buttons">
+            <button type="button" id="btn-step">➜ Ejecutar un paso</button>
+            <button type="button" id="btn-auto" class="secondary">▶️ Auto</button>
+
+            <form method="post" action="{{ url_for('reset') }}">
+                <button type="submit" class="secondary">🔄 Nuevo mapa / Reset</button>
+            </form>
+        </div>
+
+    </section>
+
+</div>
+
+<!-- Estado inicial de la simulación como JSON para JS -->
+<script id="initial-state" type="application/json">
+    {{ state | tojson }}
+</script>
+
+{% endblock %}
